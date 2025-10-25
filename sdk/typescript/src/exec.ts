@@ -22,6 +22,8 @@ export type CodexExecArgs = {
   skipGitRepoCheck?: boolean;
   // --output-schema
   outputSchemaFile?: string;
+  // -c, --config
+  config?: Record<string, unknown>;
 };
 
 const INTERNAL_ORIGINATOR_ENV = "CODEX_INTERNAL_ORIGINATOR_OVERRIDE";
@@ -59,6 +61,19 @@ export class CodexExec {
     if (args.images?.length) {
       for (const image of args.images) {
         commandArgs.push("--image", image);
+      }
+    }
+
+    if (args.config) {
+      for (const [key, value] of Object.entries(args.config)) {
+        // Format the value as JSON if it's not a primitive string/number/boolean
+        let valueStr: string;
+        if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+          valueStr = String(value);
+        } else {
+          valueStr = JSON.stringify(value);
+        }
+        commandArgs.push("--config", `${key}=${valueStr}`);
       }
     }
 
