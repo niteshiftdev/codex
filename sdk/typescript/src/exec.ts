@@ -158,7 +158,8 @@ export class CodexExec {
   }
 }
 
-const scriptFileName = fileURLToPath(import.meta.url);
+const scriptFileName =
+  typeof import.meta !== "undefined" && import.meta.url ? fileURLToPath(import.meta.url) : __filename;
 const scriptDirName = path.dirname(scriptFileName);
 
 function findCodexPath() {

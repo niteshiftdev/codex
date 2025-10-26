@@ -8,7 +8,7 @@ node_modules
 !pnpm-lock.yaml
 
 # build
-dist/
+#dist/
 build/
 out/
 storybook-static/
