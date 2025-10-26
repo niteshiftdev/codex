@@ -8,7 +8,8 @@ node_modules
 !pnpm-lock.yaml
 
 # build
-dist/
+# Dist is included for our fork
+#dist/
 build/
 out/
 storybook-static/
